@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { CacheModule, Module } from '@nestjs/common';
 import { TeamsService } from './teams.service';
 import { TeamsController } from './teams.controller';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -19,6 +19,7 @@ import { Player, PlayerSchema } from 'src/players/schemas/player.schema';
         schema: PlayerSchema,
       },
     ]),
+    CacheModule.register(),
   ],
 })
 export class TeamsModule {}

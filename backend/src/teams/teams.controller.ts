@@ -1,27 +1,28 @@
 import {
   Controller,
   Get,
-  Post,
-  Body,
-  Patch,
   Param,
-  Delete,
+  Header,
+  UseInterceptors,
+  CacheInterceptor,
 } from '@nestjs/common';
 import { TeamsService } from './teams.service';
-import { CreateTeamDto } from './dto/create-team.dto';
-import { UpdateTeamDto } from './dto/update-team.dto';
 
 @Controller('teams')
 export class TeamsController {
   constructor(private readonly teamsService: TeamsService) {}
 
+  @UseInterceptors(CacheInterceptor)
+  @Header('Cache-Control', 'public, max-age=604800') // 7 days
   @Get()
   findAll() {
     return this.teamsService.findAll();
   }
 
+  @UseInterceptors(CacheInterceptor)
+  @Header('Cache-Control', 'public, max-age=604800') // 7 days
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.teamsService.findOne(+id);
+    return this.teamsService.findOne(id);
   }
 }

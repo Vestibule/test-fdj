@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { CacheModule, Module } from '@nestjs/common';
 import { LeaguesService } from './leagues.service';
 import { LeaguesController } from './leagues.controller';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -16,6 +16,7 @@ import { Team, TeamSchema } from 'src/teams/schemas/team.schema';
         schema: TeamSchema,
       },
     ]),
+    CacheModule.register(),
   ],
 })
 export class LeaguesModule {}

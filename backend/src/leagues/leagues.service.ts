@@ -14,7 +14,17 @@ export class LeaguesService {
     return leagues;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} league`;
+  findOne(id: string) {
+    return this.leagueModel.findOne({ _id: id }).populate('teams').exec();
+  }
+
+  async search(search: string) {
+    const leagues = await this.leagueModel.find({
+      name: {
+        $regex: new RegExp(`^${search}`, 'i'),
+      },
+    });
+    console.log({ leagues });
+    return leagues;
   }
 }
