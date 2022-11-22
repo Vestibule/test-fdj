@@ -3,6 +3,8 @@ import axios from 'axios'
 import type { Ref } from 'vue'
 import type { League } from '../types'
 
+const apiUrl = import.meta.env.VITE_API_URL
+
 const showSearchResult = ref(false)
 const leagueSearch = ref('')
 const leagueSearchResults: Ref<League[]> = ref([])
@@ -12,7 +14,7 @@ const autocompleteLeagueSearch = async function () {
   else
     showSearchResult.value = true
 
-  const response = await axios.post('http://127.0.0.1:3000/leagues/search', {
+  const response = await axios.post(`${apiUrl}/leagues/search`, {
     search: leagueSearch.value,
   })
 
@@ -22,7 +24,7 @@ const autocompleteLeagueSearch = async function () {
 const selectedLeague: Ref<League | null> = ref(null)
 
 const selectLeague = async function (leagueId: string) {
-  const response = await axios.get(`http://127.0.0.1:3000/leagues/${leagueId}`)
+  const response = await axios.get(`${apiUrl}/leagues/${leagueId}`)
   selectedLeague.value = response.data as League
 
   showSearchResult.value = false

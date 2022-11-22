@@ -17,7 +17,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     }),
     LeaguesModule,
     TeamsModule,
-    CacheModule.register(),
+    CacheModule.register({ ttl: 60 * 60 }), // One hour
     ConfigModule.forRoot(),
   ],
   controllers: [AppController],

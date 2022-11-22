@@ -3,11 +3,13 @@ import axios from 'axios'
 import type { Ref } from 'vue'
 import type { Signin, Team } from '../../types'
 
+const apiUrl = import.meta.env.VITE_API_URL
+
 const route = useRoute()
 const team: Ref<Team | null> = ref(null)
 
 const fetchTeam = async function () {
-  const response = await axios.get(`http://127.0.0.1:3000/teams/${route.params.id}`)
+  const response = await axios.get(`${apiUrl}/teams/${route.params.id}`)
   team.value = response.data
 }
 fetchTeam()
@@ -19,13 +21,13 @@ const formatBirthDate = function (date: string) {
 
 const poundCurrencyFormatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
-  currency: 'USD',
+  currency: 'GBP',
   maximumFractionDigits: 0,
 })
 
 const eurCurrencyFormatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
-  currency: 'USD',
+  currency: 'EUR',
   maximumFractionDigits: 0,
 })
 

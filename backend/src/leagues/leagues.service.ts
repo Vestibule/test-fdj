@@ -24,7 +24,6 @@ export class LeaguesService {
         $regex: new RegExp(`^${search}`, 'i'),
       },
     });
-    console.log({ leagues });
     return leagues;
   }
 }
